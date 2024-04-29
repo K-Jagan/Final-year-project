@@ -6,6 +6,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({
@@ -109,6 +110,12 @@ class WebViewScreen extends StatelessWidget {
   }
 }
 
+// import 'dart:typed_data';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+// import 'package:image_picker/image_picker.dart';
+
+
 class FinishTestBar extends StatelessWidget {
   const FinishTestBar({Key? key}) : super(key: key);
 
@@ -130,8 +137,8 @@ class FinishTestBar extends StatelessWidget {
             final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
             if (image != null) {
               final imageBytes = await image.readAsBytes();
-              final result = await ImageGallerySaver.saveImage(Uint8List.fromList(imageBytes));
-              if (result['isSuccess']) {
+              final response = await uploadImageToMongoDB(imageBytes);
+              if (response.statusCode == 200) {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text('Screenshot uploaded and saved successfully'),
                 ));
@@ -150,7 +157,22 @@ class FinishTestBar extends StatelessWidget {
       ],
     );
   }
+
+  Future<http.Response> uploadImageToMongoDB(Uint8List imageBytes) async {
+    var uri = Uri.parse('http://your-server-url/upload'); // Replace with your server's upload endpoint
+    var request = http.MultipartRequest('POST', uri);
+    request.files.add(
+      http.MultipartFile.fromBytes(
+        'file',
+        imageBytes,
+        filename: 'image.jpg', // Provide a filename for the image
+      ),
+    );
+    var response = await request.send();
+    return await http.Response.fromStream(response);
+  }
 }
+
 
 void main() {
   runApp(MaterialApp(

@@ -1,13 +1,18 @@
+import 'package:placeprep/ComputerNetworking/ComputerNetworking.dart';
+import 'package:placeprep/DSA/DSA.dart';
+import 'package:placeprep/Java/Java.dart';
 import 'package:placeprep/OOPS/OOPs.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:placeprep/OperatingSystem/OperatingSystem.dart';
+import 'package:placeprep/SQL/SQL.dart';
 import 'package:placeprep/theme/color.dart';
 import 'package:placeprep/utils/data.dart';
 import 'package:placeprep/widgets/category_box.dart';
 import 'package:placeprep/widgets/feature_item.dart';
 import 'package:placeprep/widgets/notification_box.dart';
 import 'package:placeprep/widgets/recommend_item.dart';
-import 'package:placeprep/OOPS/Inheritance.dart'; // Import the inheritance screen
+ // Import the inheritance screen
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -88,7 +93,7 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 15,
           ),
-          Padding(
+          const Padding(
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
             child: Text(
               "Featured",
@@ -103,7 +108,7 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 15,
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -165,7 +170,37 @@ class _HomePageState extends State<HomePage> {
               case 0:
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ooppage()),
+                  MaterialPageRoute(builder: (context) => Ooppage()),
+                );
+                break;
+              case 1:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Java()),
+                );
+                break;
+              case 2:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => OperatingSystem()),
+                );
+                break;
+              case 3:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ComputerNetworking()),
+                );
+                break;
+              case 4:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SQL()),
+                );
+                break;
+              case 5:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DSA()),
                 );
                 break;
             // Add more cases for other screens if needed
@@ -181,6 +216,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
 
   _buildRecommended() {
     return SingleChildScrollView(

@@ -1,21 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:placeprep/OOPS/ClassandObject.dart';
-import 'package:placeprep/OOPS/Data_Abstraction.dart';
-import 'package:placeprep/OOPS/Encapsulation.dart';
-import 'package:placeprep/OOPS/Inheritance.dart';
 import 'package:placeprep/OOPS/Introduction.dart';
-import 'package:placeprep/OOPS/Polymorphism/Compile_Polymorphism.dart';
-import 'package:placeprep/OOPS/Polymorphism/Run_Polymorphism.dart';
+import 'package:placeprep/theme/color.dart';
 
-import '../theme/color.dart';
-
-class ooppage extends StatefulWidget {
-  @override
-  _ooppageState createState() => _ooppageState();
-}
-
-class _ooppageState extends State<ooppage> {
-  // Define a list of names
+class Ooppage extends StatelessWidget {
+  // Define a list of names, subnames, and image paths
   final List<String> names = [
     'Introduction',
     'Class & Object',
@@ -26,7 +14,7 @@ class _ooppageState extends State<ooppage> {
     'Encapsulation',
   ];
 
-  final List<String> subname = [
+  final List<String> subnames = [
     'to oops',
     '(Template & Instance)',
     '(Sub & Super)',
@@ -35,7 +23,7 @@ class _ooppageState extends State<ooppage> {
     '(hiding)',
     '(wrapping)',
   ];
-  // Define a list of image paths
+
   final List<String> imagePaths = [
     'assets/images/icon1.jpg',
     'assets/images/icon0.png',
@@ -50,42 +38,31 @@ class _ooppageState extends State<ooppage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.cardColor,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(90.0),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: AppBar(
-              leading: Icon(Icons.menu),
-              title: const Text("OOps"),
-              titleSpacing: 0.0,
-              centerTitle: true,
-              toolbarHeight: 60.0,
-              toolbarOpacity: 0.8,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(30),
-                  topLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                  bottomLeft: Radius.circular(30),
-                ),
-              ),
-              elevation: 1.0,
-              shadowColor: Colors.grey,
-              backgroundColor: Colors.white,
-            ),
+      appBar: AppBar(
+        leading: const Icon(Icons.menu),
+        title: const Text("OOps"),
+        centerTitle: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(30),
+            topLeft: Radius.circular(30),
+            bottomRight: Radius.circular(30),
+            bottomLeft: Radius.circular(30),
           ),
         ),
+        elevation: 1.0,
+        shadowColor: Colors.grey,
+        backgroundColor: Colors.white,
       ),
       body: GridView.count(
         crossAxisCount: 2,
         children: List.generate(
-          7,
-              (index) => CardItem(
+          names.length,
+          (index) => CardItem(
             name: names[index],
-                subname:subname[index],// Pass name from the list
-            imagePath: imagePaths[index], // Pass image path from the list
-            pageToNavigate: index, // Pass the page index to navigate
+            subname: subnames[index],
+            imagePath: imagePaths[index],
+            pageToNavigate: index,
           ),
         ),
       ),
@@ -95,87 +72,26 @@ class _ooppageState extends State<ooppage> {
 
 class CardItem extends StatelessWidget {
   final String name;
-  final String subname;// Add a name parameter
-  final String imagePath; // Add an image path parameter
-  final int pageToNavigate; // Add a parameter to specify the page to navigate
+  final String subname;
+  final String imagePath;
+  final int pageToNavigate;
 
   const CardItem({
     required this.name,
+    required this.subname,
     required this.imagePath,
     required this.pageToNavigate,
-    required this.subname,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
-        // Navigate to another page based on the pageToNavigate parameter
-        switch (pageToNavigate) {
-          case 0:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Introduction(),
-              ),
-            );
-            break;
-          case 1:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Class(),
-              ),
-            );
-            break;
-          case 2:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Inheritance(),
-              ),
-            );
-            break;
-          case 3:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Cpolymorphism(),
-              ),
-            );
-            break;
-          case 4:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Rpolymorphism(),
-              ),
-            );
-            break;
-          case 5:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Abstraction(),
-              ),
-            );
-            break;
-          case 6:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Encapsulation(),
-              ),
-            );
-            break;
-        // Add more cases for other pages if needed
-          default:
-            break;
-        }
+        navigateToPage(context, pageToNavigate);
       },
       child: Card(
-        margin: EdgeInsets.all(18),
+        margin: const EdgeInsets.all(18),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
@@ -188,18 +104,19 @@ class CardItem extends StatelessWidget {
               children: <Widget>[
                 SizedBox(height: 10),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(30,65,20,0),
+                  padding: const EdgeInsets.fromLTRB(30, 65, 20, 0),
                   child: Text(
                     '$name',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold
-                    ),
+                    style: const TextStyle(
+                        fontSize: 10, fontWeight: FontWeight.bold),
                   ),
                 ),
-                Text('$subname',style: TextStyle(
-                  fontSize: 8,
-                ),)
+                Text(
+                  '$subname',
+                  style: const TextStyle(
+                    fontSize: 8,
+                  ),
+                )
               ],
             ),
             Positioned(
@@ -216,7 +133,7 @@ class CardItem extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 3,
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
@@ -231,10 +148,24 @@ class CardItem extends StatelessWidget {
             ),
           ],
         ),
-      )
+      ),
+    );
+  }
+
+  void navigateToPage(BuildContext context, int pageIndex) {
+    final List<Widget Function(BuildContext)> pageBuilders = [
+      (context) => Introduction(),
+      (context) => Class(),
+      (context) => Inheritance(),
+      (context) => Cpolymorphism(),
+      (context) => Rpolymorphism(),
+      (context) => Abstraction(),
+      (context) => Encapsulation(),
+    ];
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: pageBuilders[pageIndex]),
     );
   }
 }
-
-
-

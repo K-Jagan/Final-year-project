@@ -32,7 +32,7 @@ Future<List<Question>> fetchQuestions() async {
 
 
 class QuizScreen extends StatefulWidget {
-  const QuizScreen({Key? key});
+  const QuizScreen({Key? key, required topic});
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();

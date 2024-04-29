@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
         // Decode JWT token to extract user information
         Map<String, dynamic> decodedToken = JwtDecoder.decode(MyToken);
         // Example: Extract user ID
-        String userId = decodedToken['userId'];
+        String userId = decodedToken['userId'] ?? ''; // Add null check and provide a default value
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => RootApp(token: MyToken, userId: userId),
@@ -66,6 +66,7 @@ class _LoginPageState extends State<LoginPage> {
       });
     }
   }
+
 
   Future<void> _showMyDialog() async {
     return showDialog<void>(

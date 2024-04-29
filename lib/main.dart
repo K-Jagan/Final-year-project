@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'screens/root_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:placeprep/screens/root_app.dart';
 import 'package:placeprep/Authentication/login.dart';
-import 'package:placeprep/theme/color.dart';
+import 'theme/color.dart';
 
-void main() async {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('token');
-  runApp(MyApp(token: token));
+  runApp(MyApp(token: prefs.getString('token'),));
 }
 
 class MyApp extends StatelessWidget {
-  final String? token;
+  final token;
 
-  const MyApp({Key? key, required this.token}) : super(key: key);
+  const MyApp({required this.token, Key? key,
+}):super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: AppColor.primary,
       ),
-      home: token != null && !JwtDecoder.isExpired(token!) ? RootApp(token: token!, userId: '') : LoginPage(),
+      home: token != null && !JwtDecoder.isExpired(token!) ? RootApp(token: token!, userId: '',) : LoginPage(),
     );
   }
 }

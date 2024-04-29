@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:placeprep/Leaderboard/profile_page.dart';
 import 'package:placeprep/screens/account.dart';
 import 'package:placeprep/screens/chat.dart';
 import 'package:placeprep/theme/color.dart';
@@ -9,19 +8,17 @@ import 'home.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 class RootApp extends StatefulWidget {
-  final token;
-  const RootApp({required this.token,Key? key, required String userId}) : super(key: key);
+  final String token;
+  final String userId; // Add userId parameter
+  const RootApp({required this.token, required this.userId, Key? key}) : super(key: key);
 
   @override
   _RootAppState createState() => _RootAppState();
 }
 
 class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
-
   int _activeTab = 0;
   late List _barItems;
-
-  //====== set animation=====
   late final AnimationController _controller = AnimationController(
     duration: const Duration(milliseconds: ANIMATED_BODY_MS),
     vsync: this,
@@ -35,12 +32,11 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    Map<dynamic,dynamic> jwtDecodedToken = JwtDecoder.decode(widget.token);
+    Map<dynamic, dynamic> jwtDecodedToken = JwtDecoder.decode(widget.token);
     email = jwtDecodedToken['email'];
     print(email);
     _controller.forward();
 
-    // Initialize _barItems here
     _barItems = [
       {
         "icon": "assets/icons/home.svg",
@@ -60,13 +56,11 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
       {
         "icon": "assets/icons/chat.svg",
         "active_icon": "assets/icons/chat.svg",
-        "page": ProfilePage(),
       },
       {
         "icon": "assets/icons/profile.svg",
         "active_icon": "assets/icons/profile.svg",
-        // "page": AccountPage(loginusername: email),
-        "page": AccountPage(loginusername: email,),
+        "page": AccountPage(loginusername: email, userId: widget.userId), // Pass userId here
       },
     ];
   }
@@ -90,8 +84,6 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
     _controller.forward();
   }
 
-  //====== end set animation=====
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +98,7 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
       index: _activeTab,
       children: List.generate(
         _barItems.length,
-            (index) => _buildAnimatedPage(_barItems[index]["page"]),
+            (index) => _buildAnimatedPage(_barItems[index]["page"] ?? Container()),
       ),
     );
   }

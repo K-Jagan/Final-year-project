@@ -14,7 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountPage extends StatefulWidget {
   final loginusername;
-  const AccountPage({required this.loginusername, Key? key}) : super(key: key);
+  const AccountPage({required this.loginusername, Key? key, required String userId}) : super(key: key);
 
   @override
   _AccountPageState createState() => _AccountPageState();

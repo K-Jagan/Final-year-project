@@ -182,118 +182,118 @@ class _CodingTestScreenState extends State<CodingTestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Coding Test'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                'Problem Statement:',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontFamily: GoogleFonts.jetBrainsMono().fontFamily, // Apply JetBrains Mono font
-                ),
-              ),
-              SizedBox(height: 8),
-              Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: Colors.grey[900],
-                ),
-                child: RichText(
-                  text: TextSpan(
+        appBar: AppBar(
+          title: const Text('Coding Test'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'Problem Statement:',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: GoogleFonts.jetBrainsMono().fontFamily, // Apply JetBrains Mono font
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.grey[900],
+                    ),
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: _problemStatement,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: GoogleFonts.jetBrainsMono().fontFamily, // Apply JetBrains Mono font
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  Text(
+                    'Start Coding.....',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: GoogleFonts.jetBrainsMono().fontFamily, // Apply JetBrains Mono font
+                    ),
+                  ),
+                  _showAnswer
+                      ? HighlightView(
+                    _answer,
+                    language: 'java', // Set the language to Java
+                    theme: monokaiSublimeTheme, // Use the Monokai Sublime theme
+                    padding: EdgeInsets.all(12),
+                  )
+                      : TextField(
+                    controller: _codeController,
+                    maxLines: 10,
+                    readOnly: false, // Enable editing
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: GoogleFonts.jetBrainsMono().fontFamily, // Apply JetBrains Mono font
+                    ),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Write your code here...',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      fillColor: Colors.grey[900],
+                      filled: true,
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    '$_secondsRemaining seconds remaining',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  SizedBox(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      TextSpan(
-                        text: _problemStatement,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: GoogleFonts.jetBrainsMono().fontFamily, // Apply JetBrains Mono font
+                      Visibility(
+                        visible: !_showAnswer, // Hide when answer is displayed
+                        child: ElevatedButton(
+                          onPressed: submitAnswer,
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                              EdgeInsets.symmetric(horizontal: 29.0, vertical: 10.0),
+                            ),
+                          ),
+                          child: Text('Submit'),
+                        ),
+                      ),
+                      Visibility(
+                        visible: !_showAnswer, // Hide when answer is displayed
+                        child: ElevatedButton(
+                          onPressed: () {
+                            revealAnswer();
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                              EdgeInsets.symmetric(horizontal: 29.0, vertical: 10.0),
+                            ),
+                          ),
+                          child: Text('Give Up'),
                         ),
                       ),
                     ],
                   ),
-                ),
-              ),
-              SizedBox(height: 30),
-              Text(
-                'Start Coding.....',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontFamily: GoogleFonts.jetBrainsMono().fontFamily, // Apply JetBrains Mono font
-                ),
-              ),
-              _showAnswer
-                  ? HighlightView(
-                _answer,
-                language: 'java', // Set the language to Java
-                theme: monokaiSublimeTheme, // Use the Monokai Sublime theme
-                padding: EdgeInsets.all(12),
-              )
-                  : TextField(
-                controller: _codeController,
-                maxLines: 10,
-                readOnly: false, // Enable editing
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: GoogleFonts.jetBrainsMono().fontFamily, // Apply JetBrains Mono font
-                ),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Write your code here...',
-                  hintStyle: TextStyle(color: Colors.grey),
-                  fillColor: Colors.grey[900],
-                  filled: true,
-                ),
-              ),
-              SizedBox(height: 16),
-              Text(
-                '$_secondsRemaining seconds remaining',
-                style: TextStyle(fontSize: 16),
-              ),
-              SizedBox(height: 24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Visibility(
-                visible: !_showAnswer, // Hide when answer is displayed
-                child: ElevatedButton(
-                  onPressed: submitAnswer,
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(horizontal: 29.0, vertical: 10.0),
-                    ),
-                  ),
-                  child: Text('Submit'),
-                ),
-              ),
-              Visibility(
-                visible: !_showAnswer, // Hide when answer is displayed
-                child: ElevatedButton(
-                  onPressed: () {
-                    revealAnswer();
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(horizontal: 29.0, vertical: 10.0),
-                    ),
-                  ),
-                  child: Text('Give Up'),
-                ),
-              ),
-            ],
-          ),
 
-        ]),
-      ),
-    ));
+                ]),
+          ),
+        ));
   }
 }
