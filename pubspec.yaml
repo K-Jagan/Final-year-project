@@ -1,0 +1,50 @@
+name: placeprep
+description: A new Flutter project.
+publish_to: none # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_speed_dial: ^7.0.0
+  permission_handler: ^9.1.0
+  flutter_tts: ^4.0.2
+  speech_to_text: ^6.3.0
+  flutter_native_screenshot: ^1.1.2
+  screenshot: ^2.3.0
+  image_gallery_saver: ^2.0.0
+  flutter_inappwebview: ^6.0.0
+  webview_flutter: ^4.7.0
+  cupertino_icons: ^1.0.2
+  flutter_svg: ^2.0.10+1
+  animate_do: ^3.3.4
+  cached_network_image: ^3.1.0
+  badges: ^3.1.2
+  flutter_highlight: ^0.7.0
+  carousel_slider: ^4.0.0
+  shared_preferences: ^2.2.2
+  google_fonts: ^6.2.1
+  jwt_decoder: ^2.0.1
+  http: ^1.2.1
+  image_picker: ^1.0.7
+  ionicons: ^0.2.2
+  get: ^4.3.8
+  image_input: ^0.0.2
+  url_launcher: ^6.0.15 # Added the url_launcher dependency here
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - assets/
+    - assets/icons/
+    - assets/icons/category/
+    - assets/images/
+    - assets/background.png
+    - assets/Illustration.png
+  uses-material-design: true
