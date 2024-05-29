@@ -1,16 +1,4 @@
-# testing1
+E-placement preparation platform
 
-A new Flutter project.
+It is critical for job searchers to have both strong technical skills and great communication talents in today's competitive employment market. In this study, an enhanced version of the e-placement preparation platform—a mobile application meant to support the development of communication skills and offer thorough technical training—is presented. Our programme incorporates gamification components with advanced features like voice help, MCQ examinations, coding tests, and mistake resolution. It was inspired by the success of platforms like Duolingo and Geek for Geeks. By providing users with a comprehensive learning experience, these elements hope to provide them with the abilities and information needed to ace placement interviews. Using technologies like MongoDB, Flutter, Figma, Express.js, and external API connectivity, our platform is carefully designed to maximise learning results and improve user engagement.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
