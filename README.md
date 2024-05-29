@@ -1,5 +1,3 @@
 E-placement preparation platform
 
 It is critical for job searchers to have both strong technical skills and great communication talents in today's competitive employment market. In this study, an enhanced version of the e-placement preparation platform—a mobile application meant to support the development of communication skills and offer thorough technical training—is presented. Our programme incorporates gamification components with advanced features like voice help, MCQ examinations, coding tests, and mistake resolution. It was inspired by the success of platforms like Duolingo and Geek for Geeks. By providing users with a comprehensive learning experience, these elements hope to provide them with the abilities and information needed to ace placement interviews. Using technologies like MongoDB, Flutter, Figma, Express.js, and external API connectivity, our platform is carefully designed to maximise learning results and improve user engagement.
-
-Login Page:![WhatsApp Image 2024-05-07 at 14 45 24_2665f599](https://github.com/K-Jagan/Final-year-project/assets/100900470/cb54f1d6-b02e-46a8-9cce-c3514f14baca)
